@@ -1,30 +1,15 @@
-import sys
-from fitness_app import calculate_fitness_level, main
+from fitness import fitness_report
 
-def test_calculate_fitness_level():
-    assert calculate_fitness_level(95) == "Excellent"
-    assert calculate_fitness_level(75) == "Very Good"
-    assert calculate_fitness_level(55) == "Good"
-    assert calculate_fitness_level(30) == "Needs Improvement"
+def test_fitness_report():
+    expected_output = (
+        "----- Fitness Report -----\n"
+        "Name            : Niranjan\n"
+        "Steps Taken     : 8000\n"
+        "Calories Burned : 500\n"
+        "Workout Time    : 30 minutes\n"
+        "Fitness Score   : 160.00\n"
+        "Fitness Level   : Excellent"
+    )
 
-
-def test_fitness_app_output(capsys, monkeypatch):
-    test_args = [
-        "fitness_app.py",
-        "Niranjan",
-        "8000",
-        "500",
-        "30"
-    ]
-
-    monkeypatch.setattr(sys, "argv", test_args)
-
-    main()
-
-    captured = capsys.readouterr().out
-
-    assert "Name            : Niranjan" in captured
-    assert "Steps Taken     : 8000" in captured
-    assert "Calories Burned : 500" in captured
-    assert "Workout Time    : 30 minutes" in captured
-    assert "Fitness Level   : Very Good" in captured
+    result = fitness_report("Niranjan", 8000, 500, 30)
+    assert result == expected_output
