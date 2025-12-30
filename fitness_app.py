@@ -1,3 +1,5 @@
+import sys
+
 def calculate_fitness_level(score):
     if score >= 90:
         return "Excellent"
@@ -9,18 +11,18 @@ def calculate_fitness_level(score):
         return "Needs Improvement"
 
 
-# Main Program
-name = input("Enter User Name: ")
-steps = int(input("Enter Steps Count: "))
-calories = int(input("Enter Calories Burned: "))
-workout_time = int(input("Enter Workout Duration (minutes): "))
+# Command line arguments
+# python fitness_app.py Name Steps Calories WorkoutTime
 
-# Fitness score calculation
+name = sys.argv[1]
+steps = int(sys.argv[2])
+calories = int(sys.argv[3])
+workout_time = int(sys.argv[4])
+
 fitness_score = (steps / 100) + (calories / 10) + workout_time
-
 level = calculate_fitness_level(fitness_score)
 
-print("\n----- Fitness Report -----")
+print("----- Fitness Report -----")
 print(f"Name            : {name}")
 print(f"Steps Taken     : {steps}")
 print(f"Calories Burned : {calories}")
